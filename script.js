@@ -107,6 +107,9 @@ const urlField = document.getElementById("domainInput");
 
 let currentEventSource = null;
 
+// Backend URL - change this to your Render.com URL once deployed
+const BACKEND_URL = 'https://cybersecuritytool.onrender.com';
+
 analyzeBtn.addEventListener("click", async () => {
   const url = urlField.value.trim();
   if (!url) return alert("Bitte eine URL eingeben!");
@@ -128,7 +131,7 @@ analyzeBtn.addEventListener("click", async () => {
   try {
     // Open EventSource for real-time progress
     currentEventSource = new EventSource(
-      `/scan-progress?domain=${encodeURIComponent(url)}&wp=true`
+      `${BACKEND_URL}/scan-progress?domain=${encodeURIComponent(url)}&wp=true`
     );
 
     let hasResult = false;
