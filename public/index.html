@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cyber Security Tool</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hero -->
+    <header class="hero">
+      <h1 class="hero-title">🛡️ Cyber Security Analyse</h1>
+      <p class="hero-sub">Cyber Security Audit Tool</p>
+    </header>
+
+    <!-- URL Eingabe -->
+    <section class="url-input">
+      <input type="text" id="domainInput" placeholder="https://example.com" />
+      <button id="analyzeBtn">Analysieren</button>
+    </section>
+
+    <!-- Loading Bar -->
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+
+    <!-- Score Ring -->
+    <section class="stats">
+      <div class="score-ring">
+        <svg viewBox="0 0 100 100">
+          <circle class="bg-ring" cx="50" cy="50" r="45" />
+          <circle class="progress-ring" cx="50" cy="50" r="45" />
+          <text
+            x="50%"
+            y="50%"
+            text-anchor="middle"
+            
+            dy=".3em"
+            class="score-text"
+          >
+            0%
+          </text>
+        </svg>
+        <p class="score-label">Gesamtscore</p>
+      </div>
+    </section>
+
+    <!-- Module Grid -->
+    <section class="modules">
+      <h2>Module Bewertung</h2>
+      <div class="grid">
+        <div class="module-card" data-module="ssl">
+          <div class="module-header">
+            <h3>SSL <span class="info-icon" data-module="ssl">i</span></h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+
+        <div class="module-card" data-module="spf">
+          <div class="module-header">
+            <h3>SPF <span class="info-icon" data-module="spf">i</span></h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+
+        <div class="module-card" data-module="dmarc">
+          <div class="module-header">
+            <h3>DMARC <span class="info-icon" data-module="dmarc">i</span></h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+
+        <div class="module-card" data-module="cookies">
+          <div class="module-header">
+            <h3>
+              Cookies <span class="info-icon" data-module="cookies">i</span>
+            </h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+
+        <div class="module-card" data-module="security headers">
+          <div class="module-header">
+            <h3>
+              Security Headers
+              <span class="info-icon" data-module="security headers">i</span>
+            </h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+
+        <div class="module-card" data-module="wordpress">
+          <div class="module-header">
+            <h3>
+              WordPress <span class="info-icon" data-module="wordpress">i</span>
+            </h3>
+            <span class="score">–</span>
+            <span class="toggle-arrow">▸</span>
+          </div>
+          <div class="module-details"><ul></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

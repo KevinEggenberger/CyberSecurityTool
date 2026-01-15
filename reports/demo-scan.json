@@ -1,0 +1,429 @@
+{
+  "domain": "example.com",
+  "score": {
+    "score": 100,
+    "maxScore": 200,
+    "percentage": 50,
+    "clusters": {
+      "network": {
+        "score": 20,
+        "maxScore": 50,
+        "percentage": 40
+      },
+      "web": {
+        "score": 45,
+        "maxScore": 95,
+        "percentage": 47
+      },
+      "auth": {
+        "score": 20,
+        "maxScore": 35,
+        "percentage": 57
+      },
+      "mail": {
+        "score": 10,
+        "maxScore": 10,
+        "percentage": 100
+      },
+      "privacy": {
+        "score": 5,
+        "maxScore": 10,
+        "percentage": 50
+      }
+    }
+  },
+  "modules": {
+    "ssl": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "Zertifikat gültig",
+          "status": "OK (100%)"
+        }
+      ]
+    },
+    "spf": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "SPF-Eintrag vorhanden",
+          "status": "OK (100%)"
+        }
+      ]
+    },
+    "dmarc": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "DMARC",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "DMARC-Konfiguration sieht gut aus."
+        }
+      ]
+    },
+    "api": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "API",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "Keine öffentlich erreichbaren API-Endpunkte gefunden."
+        }
+      ]
+    },
+    "dns": {
+      "score": 88,
+      "tests": [
+        {
+          "name": "MX-Eintrag",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "SPF-Eintrag",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "DMARC",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "DNSSEC",
+          "status": "WARNUNG (50%)"
+        }
+      ]
+    },
+    "xss": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "XSS",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "Keine offensichtliche XSS-Schwachstelle erkannt."
+        }
+      ]
+    },
+    "webvuln": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "Web Vulnerabilities",
+          "status": "OK (100%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "Keine offensichtlichen Web-Schwachstellen erkannt."
+        }
+      ]
+    },
+    "wordpress": {
+      "score": 0,
+      "tests": [
+        {
+          "name": "WordPress",
+          "status": "NICHT ERKANNT (0%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "WordPress-Modul deaktiviert – keine Bewertung durchgeführt."
+        }
+      ]
+    },
+    "ports": {
+      "score": 0,
+      "tests": [
+        {
+          "name": "Ports",
+          "status": "OK (0%)"
+        }
+      ]
+    },
+    "subdomains": {
+      "score": 100,
+      "tests": [
+        {
+          "name": "www.example.com",
+          "status": "gefunden (100%)"
+        }
+      ]
+    },
+    "cookies": {
+      "score": 50,
+      "tests": [
+        {
+          "name": "Cookies",
+          "status": "WARNUNG (50%)"
+        },
+        {
+          "name": "Empfehlung",
+          "status": "Tracking-Cookies erkannt. DSGVO-Konformität prüfen."
+        }
+      ]
+    },
+    "csp": {
+      "score": 50,
+      "tests": [
+        {
+          "name": "CSP fehlt",
+          "status": "WARNUNG (50%)"
+        }
+      ]
+    },
+    "oauth": {
+      "score": 0,
+      "tests": [
+        {
+          "name": "OAuth/OpenID nicht erkannt",
+          "status": "NICHT ERKANNT (0%)"
+        }
+      ]
+    },
+    "security headers": {
+      "score": 0,
+      "tests": [
+        {
+          "name": "strict-transport-security",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "x-content-type-options",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "x-frame-options",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "x-xss-protection",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "referrer-policy",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "content-security-policy",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        },
+        {
+          "name": "permissions-policy",
+          "status": "FEHLT (0%)",
+          "pct": 0
+        }
+      ]
+    }
+  },
+  "modulesRaw": {
+    "ssl": {
+      "status": "OK",
+      "recommendation": "Zertifikat gültig – läuft in 41 Tagen ab.",
+      "details": [
+        {
+          "name": "Zertifikat gültig",
+          "status": "OK",
+          "problem": "Das SSL-Zertifikat ist gültig und läuft in 41 Tagen ab.",
+          "fix": "Keine Aktion erforderlich. Notiere dir das Ablaufdatum und erneuere rechtzeitig vorher."
+        }
+      ]
+    },
+    "spf": {
+      "status": "OK",
+      "recommendation": "SPF-Konfiguration sieht gut aus.",
+      "details": [
+        {
+          "name": "SPF-Eintrag vorhanden",
+          "status": "OK",
+          "problem": "Ein korrekter SPF-Eintrag mit hardening qualifier '-all' ist konfiguriert.",
+          "fix": "Keine Aktion erforderlich. Prüfe regelmäßig, dass der SPF-Eintrag aktuell ist, besonders wenn neue Mail-Services hinzukommen."
+        }
+      ]
+    },
+    "dmarc": {
+      "status": "OK",
+      "recommendation": "DMARC-Konfiguration sieht gut aus."
+    },
+    "api": {
+      "status": "OK",
+      "recommendation": "Keine öffentlich erreichbaren API-Endpunkte gefunden."
+    },
+    "dns": {
+      "status": "WARNUNG",
+      "recommendation": "Siehe Details zu DNS-Einträgen und DNSSEC.",
+      "details": [
+        {
+          "name": "MX-Eintrag",
+          "status": "OK",
+          "problem": "MX-Einträge gefunden: .",
+          "fix": "Keine Aktion erforderlich, wenn die MX-Einträge beabsichtigt sind."
+        },
+        {
+          "name": "SPF-Eintrag",
+          "status": "OK",
+          "problem": "SPF-Eintrag gefunden: v=spf1 -all",
+          "fix": "SPF-Eintrag regelmäßig prüfen und nur autorisierte Mailserver aufnehmen."
+        },
+        {
+          "name": "DMARC",
+          "status": "OK",
+          "problem": "DMARC-Eintrag gefunden: v=DMARC1;p=reject;sp=reject;adkim=s;aspf=s",
+          "fix": "DMARC-Richtlinien regelmäßig prüfen und RO-Reporting aktivieren."
+        },
+        {
+          "name": "DNSSEC",
+          "status": "WARNUNG",
+          "problem": "Keine DNSSEC-Signaturen gefunden. DNS-Antworten können theoretisch manipuliert werden (z. B. via DNS-Spoofing).",
+          "fix": "DNSSEC beim DNS-Provider aktivieren und DS-Record bei Ihrem Registrar hinterlegen."
+        }
+      ]
+    },
+    "xss": {
+      "status": "OK",
+      "recommendation": "Keine offensichtliche XSS-Schwachstelle erkannt."
+    },
+    "webvuln": {
+      "status": "OK",
+      "recommendation": "Keine offensichtlichen Web-Schwachstellen erkannt."
+    },
+    "wordpress": {
+      "status": "NICHT ERKANNT",
+      "recommendation": "WordPress-Modul deaktiviert – keine Bewertung durchgeführt.",
+      "details": [],
+      "score": 0,
+      "maxScore": 0
+    },
+    "ports": {
+      "21": {
+        "status": "GESCHLOSSEN",
+        "service": "FTP"
+      },
+      "22": {
+        "status": "GESCHLOSSEN",
+        "service": "SSH"
+      },
+      "25": {
+        "status": "OFFEN",
+        "service": "SMTP"
+      },
+      "53": {
+        "status": "OFFEN",
+        "service": "DNS"
+      },
+      "80": {
+        "status": "OFFEN",
+        "service": "HTTP"
+      },
+      "110": {
+        "status": "GESCHLOSSEN",
+        "service": "POP3"
+      },
+      "143": {
+        "status": "GESCHLOSSEN",
+        "service": "IMAP"
+      },
+      "443": {
+        "status": "OFFEN",
+        "service": "HTTPS"
+      },
+      "3306": {
+        "status": "GESCHLOSSEN",
+        "service": "MySQL"
+      },
+      "8080": {
+        "status": "GESCHLOSSEN",
+        "service": "HTTP-Alt"
+      }
+    },
+    "subdomains": [
+      "www.example.com"
+    ],
+    "cookies": {
+      "status": "WARNUNG",
+      "recommendation": "Tracking-Cookies erkannt. DSGVO-Konformität prüfen."
+    },
+    "csp": {
+      "status": "WARNUNG",
+      "recommendation": "Siehe CSP-Details für empfohlene Maßnahmen.",
+      "details": [
+        {
+          "name": "CSP fehlt",
+          "status": "WARNUNG",
+          "problem": "Kein Content-Security-Policy Header gefunden. Ohne CSP ist der Schutz gegen XSS und Daten-Injection reduziert.",
+          "fix": "Setzen Sie einen CSP-Header mit restriktiven Direktiven, z. B. \"default-src 'self'; script-src 'self'\". Verwenden Sie Nonces oder Hashes statt unsafe-inline."
+        }
+      ]
+    },
+    "oauth": {
+      "status": "NICHT ERKANNT",
+      "recommendation": "Keine OAuth/OpenID-Discovery-Datei gefunden.",
+      "details": [
+        {
+          "name": "OAuth/OpenID nicht erkannt",
+          "status": "NICHT ERKANNT",
+          "problem": "Es wurde keine OAuth/OpenID-Discovery-Datei unter /.well-known/openid-configuration gefunden.",
+          "fix": "Falls OAuth/OpenID verwendet wird, stelle sicher, dass die Discovery-Datei unter dem korrekten Pfad erreichbar ist."
+        }
+      ]
+    },
+    "headers": {
+      "strict-transport-security": {
+        "status": "FEHLT",
+        "recommendation": "Header \"strict-transport-security\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "x-content-type-options": {
+        "status": "FEHLT",
+        "recommendation": "Header \"x-content-type-options\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "x-frame-options": {
+        "status": "FEHLT",
+        "recommendation": "Header \"x-frame-options\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "x-xss-protection": {
+        "status": "FEHLT",
+        "recommendation": "Header \"x-xss-protection\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "referrer-policy": {
+        "status": "FEHLT",
+        "recommendation": "Header \"referrer-policy\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "content-security-policy": {
+        "status": "FEHLT",
+        "recommendation": "Header \"content-security-policy\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "permissions-policy": {
+        "status": "FEHLT",
+        "recommendation": "Header \"permissions-policy\" fehlt. Füge ihn hinzu für besseren Schutz.",
+        "score": 0,
+        "maxScore": 5
+      },
+      "score": 0,
+      "maxScore": 35
+    }
+  },
+  "scanTime": 3776
+}
