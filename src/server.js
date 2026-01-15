@@ -19,10 +19,10 @@ const checkSSL = require("./scanners/sslScanner");
 const calculateScore = require("./utils/scoreCalculator");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "..")));
 
 const statusToScore = (status) => {
   switch ((status || "").toUpperCase()) {

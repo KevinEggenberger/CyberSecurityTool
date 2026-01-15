@@ -81,24 +81,36 @@ function showInfoPopup(title, text) {
 
 // Helper: map status text to CSS class
 function statusToClass(status) {
-  if (!status) return 'gray';
+  if (!status) return "gray";
   const s = String(status).toUpperCase();
-  if (s.includes('OK') || s === 'OK') return 'green';
-  if (s.includes('WARN') || s === 'WARNUNG') return 'yellow';
-  if (s.includes('KRIT') || s.includes('FEHL') || s === 'KRITISCH' || s === 'FEHLT') return 'red';
-  if (s.includes('NICHT') || s.includes('NICHT ERKANNT')) return 'gray';
-  return 'gray';
+  if (s.includes("OK") || s === "OK") return "green";
+  if (s.includes("WARN") || s === "WARNUNG") return "yellow";
+  if (
+    s.includes("KRIT") ||
+    s.includes("FEHL") ||
+    s === "KRITISCH" ||
+    s === "FEHLT"
+  )
+    return "red";
+  if (s.includes("NICHT") || s.includes("NICHT ERKANNT")) return "gray";
+  return "gray";
 }
 
 // Helper: map status text to small icon (Unicode)
 function statusToIcon(status) {
-  if (!status) return 'ℹ';
+  if (!status) return "ℹ";
   const s = String(status).toUpperCase();
-  if (s.includes('OK') || s === 'OK') return '✓';
-  if (s.includes('WARN') || s === 'WARNUNG') return '⚠';
-  if (s.includes('KRIT') || s.includes('FEHL') || s === 'KRITISCH' || s === 'FEHLT') return '✖';
-  if (s.includes('NICHT') || s.includes('NICHT ERKANNT')) return 'ℹ';
-  return 'ℹ';
+  if (s.includes("OK") || s === "OK") return "✓";
+  if (s.includes("WARN") || s === "WARNUNG") return "⚠";
+  if (
+    s.includes("KRIT") ||
+    s.includes("FEHL") ||
+    s === "KRITISCH" ||
+    s === "FEHLT"
+  )
+    return "✖";
+  if (s.includes("NICHT") || s.includes("NICHT ERKANNT")) return "ℹ";
+  return "ℹ";
 }
 
 // --- URL Eingabe + Button ---
@@ -108,7 +120,7 @@ const urlField = document.getElementById("domainInput");
 let currentEventSource = null;
 
 // Backend URL - change this to your Render.com URL once deployed
-const BACKEND_URL = 'https://cybersecuritytool.onrender.com';
+const BACKEND_URL = "https://cybersecuritytool-6xgr.onrender.com";
 
 analyzeBtn.addEventListener("click", async () => {
   const url = urlField.value.trim();
@@ -167,9 +179,7 @@ analyzeBtn.addEventListener("click", async () => {
         loadingBar.style.width = progressPercent + "%";
         loadingBar.style.transition = "width 0.3s ease";
 
-        console.log(
-          `📊 Fortschritt: ${progressPercent}% (${data.module})`
-        );
+        console.log(`📊 Fortschritt: ${progressPercent}% (${data.module})`);
 
         // If scan is complete (100%) and result is available
         if (progressPercent === 100 && data.result && !hasResult) {
@@ -205,7 +215,9 @@ analyzeBtn.addEventListener("click", async () => {
       }
       if (!hasResult) {
         loadingContainer.classList.remove("active");
-        alert("Verbindung zum Server unterbrochen. Bitte versuchen Sie es erneut.");
+        alert(
+          "Verbindung zum Server unterbrochen. Bitte versuchen Sie es erneut."
+        );
       }
     };
   } catch (err) {
@@ -221,49 +233,58 @@ analyzeBtn.addEventListener("click", async () => {
 
 // --- Module aktualisieren ---
 function updateModules(modules, modulesRaw) {
-  document.querySelectorAll('.module-card').forEach((card) => {
+  document.querySelectorAll(".module-card").forEach((card) => {
     const key = card.dataset.module; // e.g. 'ssl', 'dmarc', 'security headers'
-    const scoreEl = card.querySelector('.score');
-    const detailsEl = card.querySelector('.module-details ul');
+    const scoreEl = card.querySelector(".score");
+    const detailsEl = card.querySelector(".module-details ul");
 
     const mod = modules && modules[key];
     const raw = modulesRaw && modulesRaw[key];
     // Some module keys differ between aggregated `modules` and `modulesRaw` (e.g. "security headers" vs "headers").
     let rawData = raw;
-    if (!rawData && key === 'security headers' && modulesRaw) rawData = modulesRaw.headers || modulesRaw['security headers'];
-    if (!rawData && key === 'cookies' && modulesRaw) rawData = modulesRaw.cookies || modulesRaw['cookies'];
+    if (!rawData && key === "security headers" && modulesRaw)
+      rawData = modulesRaw.headers || modulesRaw["security headers"];
+    if (!rawData && key === "cookies" && modulesRaw)
+      rawData = modulesRaw.cookies || modulesRaw["cookies"];
 
-    const pct = mod && typeof mod.score === 'number' ? mod.score : (raw && raw.score) || '–';
-    scoreEl.textContent = typeof pct === 'number' ? pct + '%' : '–';
+    const pct =
+      mod && typeof mod.score === "number"
+        ? mod.score
+        : (raw && raw.score) || "–";
+    scoreEl.textContent = typeof pct === "number" ? pct + "%" : "–";
 
-    detailsEl.innerHTML = '';
+    detailsEl.innerHTML = "";
 
     // Prefer raw.details if available (contains problem/fix), otherwise fall back to mod.tests
     if (rawData && Array.isArray(rawData.details)) {
       rawData.details.forEach((d, idx) => {
-        const li = document.createElement('li');
-        const row = document.createElement('div');
-        row.className = 'item-row';
+        const li = document.createElement("li");
+        const row = document.createElement("div");
+        row.className = "item-row";
 
-        const left = document.createElement('div'); left.className = 'item-left';
-        const title = document.createElement('div');
-        title.className = 'item-title';
+        const left = document.createElement("div");
+        left.className = "item-left";
+        const title = document.createElement("div");
+        title.className = "item-title";
         title.textContent = d.name || `Detail ${idx + 1}`;
 
-        const badge = document.createElement('div');
-        badge.className = 'status-badge ' + statusToClass(d.status);
-        badge.innerHTML = `<span class="badge-icon">${statusToIcon(d.status)}</span>${d.status || '–'}`;
+        const badge = document.createElement("div");
+        badge.className = "status-badge " + statusToClass(d.status);
+        badge.innerHTML = `<span class="badge-icon">${statusToIcon(
+          d.status
+        )}</span>${d.status || "–"}`;
 
         left.appendChild(title);
 
-        const right = document.createElement('div'); right.className = 'item-right';
-        const toggle = document.createElement('button');
-        toggle.className = 'toggle-detail';
-        toggle.textContent = 'Details';
+        const right = document.createElement("div");
+        right.className = "item-right";
+        const toggle = document.createElement("button");
+        toggle.className = "toggle-detail";
+        toggle.textContent = "Details";
 
-        const status = document.createElement('div');
-        status.className = 'item-status';
-        status.style.minWidth = '56px';
+        const status = document.createElement("div");
+        status.className = "item-status";
+        status.style.minWidth = "56px";
         status.appendChild(badge);
 
         row.appendChild(left);
@@ -271,52 +292,75 @@ function updateModules(modules, modulesRaw) {
         right.appendChild(status);
         right.appendChild(toggle);
 
-        const body = document.createElement('div');
-        body.className = 'detail-body';
-        const prob = document.createElement('div');
-        prob.innerHTML = `<strong><span class="detail-icon">${statusToIcon(d.status)}</span>Problem:</strong> ${d.problem || '—'}`;
-        const fix = document.createElement('div');
-        fix.style.marginTop = '6px';
-        fix.innerHTML = `<strong><span class="detail-icon">🛠</span>Fix:</strong> ${d.fix || '—'}`;
+        const body = document.createElement("div");
+        body.className = "detail-body";
+        const prob = document.createElement("div");
+        prob.innerHTML = `<strong><span class="detail-icon">${statusToIcon(
+          d.status
+        )}</span>Problem:</strong> ${d.problem || "—"}`;
+        const fix = document.createElement("div");
+        fix.style.marginTop = "6px";
+        fix.innerHTML = `<strong><span class="detail-icon">🛠</span>Fix:</strong> ${
+          d.fix || "—"
+        }`;
         body.appendChild(prob);
         body.appendChild(fix);
 
         li.appendChild(row);
         li.appendChild(body);
 
-        toggle.addEventListener('click', (ev) => {
+        toggle.addEventListener("click", (ev) => {
           ev.stopPropagation();
-          li.classList.toggle('open');
+          li.classList.toggle("open");
         });
 
         detailsEl.appendChild(li);
       });
-    } else if (key === 'security headers' && rawData && typeof rawData === 'object') {
+    } else if (
+      key === "security headers" &&
+      rawData &&
+      typeof rawData === "object"
+    ) {
       // rawData is expected to be the headers object (modulesRaw.headers)
       Object.entries(rawData).forEach(([h, val]) => {
-        if (h === 'score' || h === 'maxScore') return;
-        const li = document.createElement('li');
-        const row = document.createElement('div');
-        row.className = 'item-row';
+        if (h === "score" || h === "maxScore") return;
+        const li = document.createElement("li");
+        const row = document.createElement("div");
+        row.className = "item-row";
 
-        const left = document.createElement('div'); left.className = 'item-left';
-        const title = document.createElement('div'); title.className = 'item-title';
+        const left = document.createElement("div");
+        left.className = "item-left";
+        const title = document.createElement("div");
+        title.className = "item-title";
         title.textContent = h;
 
-        const badge = document.createElement('div');
-        badge.className = 'status-badge ' + statusToClass(val && val.status);
-        badge.innerHTML = `<span class="badge-icon">${statusToIcon(val && val.status)}</span>${(val && val.status) || '–'}`;
+        const badge = document.createElement("div");
+        badge.className = "status-badge " + statusToClass(val && val.status);
+        badge.innerHTML = `<span class="badge-icon">${statusToIcon(
+          val && val.status
+        )}</span>${(val && val.status) || "–"}`;
 
-        const right = document.createElement('div'); right.className = 'item-right';
-        const infoBox = document.createElement('div'); infoBox.className = 'item-status'; infoBox.appendChild(badge);
-        const toggle = document.createElement('button'); toggle.className = 'toggle-detail'; toggle.textContent = 'Details';
+        const right = document.createElement("div");
+        right.className = "item-right";
+        const infoBox = document.createElement("div");
+        infoBox.className = "item-status";
+        infoBox.appendChild(badge);
+        const toggle = document.createElement("button");
+        toggle.className = "toggle-detail";
+        toggle.textContent = "Details";
 
         left.appendChild(title);
         right.appendChild(infoBox);
         right.appendChild(toggle);
 
-        const body = document.createElement('div'); body.className = 'detail-body';
-        const rec = document.createElement('div'); rec.innerHTML = `<strong><span class="detail-icon">ℹ</span>Info:</strong> ${val && val.recommendation ? val.recommendation : 'Keine zusätzliche Info.'}`;
+        const body = document.createElement("div");
+        body.className = "detail-body";
+        const rec = document.createElement("div");
+        rec.innerHTML = `<strong><span class="detail-icon">ℹ</span>Info:</strong> ${
+          val && val.recommendation
+            ? val.recommendation
+            : "Keine zusätzliche Info."
+        }`;
         body.appendChild(rec);
 
         li.appendChild(row);
@@ -325,64 +369,76 @@ function updateModules(modules, modulesRaw) {
         row.appendChild(left);
         row.appendChild(right);
 
-        toggle.addEventListener('click', (ev) => { ev.stopPropagation(); li.classList.toggle('open'); });
+        toggle.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          li.classList.toggle("open");
+        });
         detailsEl.appendChild(li);
       });
-    } else if (key === 'ports' && raw && typeof raw === 'object') {
+    } else if (key === "ports" && raw && typeof raw === "object") {
       // raw is an object mapping port -> {status, service}
       Object.entries(raw).forEach(([p, info]) => {
-        const li = document.createElement('li');
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        const title = document.createElement('div');
-        title.className = 'item-title';
+        const li = document.createElement("li");
+        const row = document.createElement("div");
+        row.className = "item-row";
+        const title = document.createElement("div");
+        title.className = "item-title";
         title.textContent = `Port ${p}`;
-        const status = document.createElement('div');
-        status.className = 'item-status';
-        status.textContent = info.status || '–';
+        const status = document.createElement("div");
+        status.className = "item-status";
+        status.textContent = info.status || "–";
 
-        const toggle = document.createElement('button');
-        toggle.className = 'toggle-detail';
-        toggle.textContent = 'Details';
+        const toggle = document.createElement("button");
+        toggle.className = "toggle-detail";
+        toggle.textContent = "Details";
 
-        const badge = document.createElement('div');
-        badge.className = 'status-badge ' + statusToClass(info.status);
-        badge.innerHTML = `<span class="badge-icon">${statusToIcon(info.status)}</span>${info.status || '–'}`;
+        const badge = document.createElement("div");
+        badge.className = "status-badge " + statusToClass(info.status);
+        badge.innerHTML = `<span class="badge-icon">${statusToIcon(
+          info.status
+        )}</span>${info.status || "–"}`;
 
-        const left = document.createElement('div'); left.className = 'item-left'; left.appendChild(title);
-        const right = document.createElement('div'); right.className = 'item-right';
-        const infoBox = document.createElement('div'); infoBox.className = 'item-status'; infoBox.appendChild(badge);
+        const left = document.createElement("div");
+        left.className = "item-left";
+        left.appendChild(title);
+        const right = document.createElement("div");
+        right.className = "item-right";
+        const infoBox = document.createElement("div");
+        infoBox.className = "item-status";
+        infoBox.appendChild(badge);
         right.appendChild(infoBox);
         right.appendChild(toggle);
 
         row.appendChild(left);
         row.appendChild(right);
 
-        const body = document.createElement('div');
-        body.className = 'detail-body';
-        body.innerHTML = `<strong><span class="detail-icon">🔌</span>Service:</strong> ${info.service || '–'}`;
+        const body = document.createElement("div");
+        body.className = "detail-body";
+        body.innerHTML = `<strong><span class="detail-icon">🔌</span>Service:</strong> ${
+          info.service || "–"
+        }`;
 
         li.appendChild(row);
         li.appendChild(body);
 
-        toggle.addEventListener('click', (ev) => {
+        toggle.addEventListener("click", (ev) => {
           ev.stopPropagation();
-          li.classList.toggle('open');
+          li.classList.toggle("open");
         });
 
         detailsEl.appendChild(li);
       });
-    } else if (key === 'subdomains' && Array.isArray(raw)) {
+    } else if (key === "subdomains" && Array.isArray(raw)) {
       raw.forEach((s) => {
-        const li = document.createElement('li');
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        const title = document.createElement('div');
-        title.className = 'item-title';
+        const li = document.createElement("li");
+        const row = document.createElement("div");
+        row.className = "item-row";
+        const title = document.createElement("div");
+        title.className = "item-title";
         title.textContent = s;
-        const status = document.createElement('div');
-        status.className = 'item-status';
-        status.textContent = 'gefunden';
+        const status = document.createElement("div");
+        status.className = "item-status";
+        status.textContent = "gefunden";
         row.appendChild(title);
         row.appendChild(status);
         li.appendChild(row);
@@ -390,15 +446,15 @@ function updateModules(modules, modulesRaw) {
       });
     } else if (mod && Array.isArray(mod.tests)) {
       mod.tests.forEach((t, idx) => {
-        const li = document.createElement('li');
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        const title = document.createElement('div');
-        title.className = 'item-title';
+        const li = document.createElement("li");
+        const row = document.createElement("div");
+        row.className = "item-row";
+        const title = document.createElement("div");
+        title.className = "item-title";
         title.textContent = t.name || `Test ${idx + 1}`;
-        const status = document.createElement('div');
-        status.className = 'item-status';
-        status.textContent = t.status || '–';
+        const status = document.createElement("div");
+        status.className = "item-status";
+        status.textContent = t.status || "–";
 
         row.appendChild(title);
         row.appendChild(status);
