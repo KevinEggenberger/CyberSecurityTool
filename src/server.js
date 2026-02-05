@@ -224,7 +224,12 @@ app.get("/scan-progress", async (req, res) => {
   const sendProgress = (moduleName) => {
     progress++;
     const percentage = Math.round((progress / totalModules) * 100);
-    res.write(`data: ${JSON.stringify({ progress: percentage, module: moduleName })}\n\n`);
+    res.write(
+      `data: ${JSON.stringify({
+        progress: percentage,
+        module: moduleName,
+      })}\n\n`
+    );
     console.log(`📊 Scan-Fortschritt: ${percentage}% (${moduleName})`);
   };
 
@@ -341,7 +346,13 @@ app.get("/scan-progress", async (req, res) => {
       headers,
     };
 
-    res.write(`data: ${JSON.stringify({ progress: 100, module: "Fertig", result: { domain, score, modules, modulesRaw } })}\n\n`);
+    res.write(
+      `data: ${JSON.stringify({
+        progress: 100,
+        module: "Fertig",
+        result: { domain, score, modules, modulesRaw },
+      })}\n\n`
+    );
     res.end();
   } catch (err) {
     console.error("Fehler bei Scan-Fortschritt:", err);
